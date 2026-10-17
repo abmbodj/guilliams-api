@@ -37,7 +37,12 @@ def challenge_result(challenge):
     }
 
 
-@router.post("/auth/challenges/", response_model=m.Challenge, status_code=201)
+@router.post(
+    "/auth/challenges/",
+    response_model=m.Challenge,
+    status_code=201,
+    openapi_extra={"security": [{}]},
+)
 def create_challenge(
     body: m.ChallengeRequest, request: Request, credentials=Depends(bearer), c=Depends(connection)
 ):
@@ -72,7 +77,11 @@ def create_challenge(
     return challenge_result(ch)
 
 
-@router.post("/auth/challenges/{challenge_id}/resend/", response_model=m.Challenge)
+@router.post(
+    "/auth/challenges/{challenge_id}/resend/",
+    response_model=m.Challenge,
+    openapi_extra={"security": [{}]},
+)
 def resend(challenge_id: str, request: Request, credentials=Depends(bearer), c=Depends(connection)):
     if not request.app.state.demo_mode:
         fail(503, "simulation_disabled", "Verification delivery is unavailable")
@@ -93,7 +102,7 @@ def resend(challenge_id: str, request: Request, credentials=Depends(bearer), c=D
     return challenge_result(ch)
 
 
-@router.post("/auth/verify/", response_model=m.Session)
+@router.post("/auth/verify/", response_model=m.Session, openapi_extra={"security": [{}]})
 def verify(body: m.Verify, request: Request, credentials=Depends(bearer), c=Depends(connection)):
     if not request.app.state.demo_mode:
         fail(503, "simulation_disabled", "Verification delivery is unavailable")

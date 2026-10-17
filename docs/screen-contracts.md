@@ -2091,4 +2091,3 @@ Each state links to the Figma and lists proposed inputs, displayed data, API ope
 **Buttons/destinations:** Send → acknowledgement; Back → settings.
 
 **Evidence:** frame metadata; flow-level visual review. Source labels inventoried; generic component text slots and product requiredness need confirmation.
-

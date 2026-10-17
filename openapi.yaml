@@ -358,6 +358,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       security:
       - HTTPBearer: []
+      - {}
   /api/auth/challenges/{challenge_id}/resend/:
     post:
       tags:
@@ -366,6 +367,7 @@ paths:
       operationId: resend_api_auth_challenges__challenge_id__resend__post
       security:
       - HTTPBearer: []
+      - {}
       parameters:
       - name: challenge_id
         in: path
@@ -509,6 +511,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
       security:
       - HTTPBearer: []
+      - {}
   /api/me/:
     get:
       tags:

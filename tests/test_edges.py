@@ -354,3 +354,13 @@ def test_live_offer_prevents_currency_or_unit_changes(client):
         client.patch("/api/listings/demo-chair/", headers=a, json={"currency": "USD"}).status_code
         == 409
     )
+
+
+def test_openapi_documents_optional_auth_for_code_entry(client):
+    spec = client.get("/openapi.json").json()
+    for path in [
+        "/api/auth/challenges/",
+        "/api/auth/verify/",
+        "/api/auth/challenges/{challenge_id}/resend/",
+    ]:
+        assert {} in spec["paths"][path]["post"]["security"]

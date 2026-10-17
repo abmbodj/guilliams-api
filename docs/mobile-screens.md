@@ -1497,4 +1497,3 @@
 **Source text-layer labels/slots:** It’s ok for now, thanks.; Concierge; Thank you for helping us. Have a good day!; Write message here.
 
 - [ ] Confirm component-slot copy and field requiredness with the product/design owner.
-

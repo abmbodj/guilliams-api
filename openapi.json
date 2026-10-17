@@ -590,7 +590,8 @@
         "security": [
           {
             "HTTPBearer": []
-          }
+          },
+          {}
         ]
       }
     },
@@ -604,7 +605,8 @@
         "security": [
           {
             "HTTPBearer": []
-          }
+          },
+          {}
         ],
         "parameters": [
           {
@@ -843,7 +845,8 @@
         "security": [
           {
             "HTTPBearer": []
-          }
+          },
+          {}
         ]
       }
     },
