@@ -2,7 +2,7 @@
 
 [![Verify API](https://github.com/abmbodj/guilliams-api/actions/workflows/ci.yml/badge.svg)](https://github.com/abmbodj/guilliams-api/actions/workflows/ci.yml)
 
-The Phase 1 backend for the Guilliams mobile app. It provides API contracts and working endpoints for the Figma flows, with fictional test data and SQLite persistence.
+The TypeScript/Fastify Phase 1 backend for the Guilliams mobile app. It provides API contracts and working endpoints for the Figma flows, with fictional test data and SQLite persistence.
 
 **Phase 1 goal:** make the app flows work before adding external integrations. SMS, email, contact suggestions, push delivery and concierge responses are simulated or deferred.
 
@@ -22,15 +22,13 @@ The repository contains **52 API operations**, an inventory of **209 mobile-size
 
 ## Quick start
 
-Requirements: **Python 3.11+**. Development and CI have been verified on Python 3.14. **Node.js 22+** is needed only for the mobile-client smoke check.
+Requirements: **Node.js 22.16.0 or later** and npm. The API uses Node’s built-in SQLite driver. `.nvmrc` selects the supported Node 22 release line.
 
 ```sh
 git clone https://github.com/abmbodj/guilliams-api.git
 cd guilliams-api
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements-dev.txt
-uvicorn app.main:app --host 127.0.0.1 --port 8765
+npm ci
+npm run dev
 ```
 
 If you already have the repository, start from its root directory and skip the clone steps. These commands use a macOS/Linux shell.
@@ -120,7 +118,7 @@ See the [API and mobile handling contracts](docs/contracts.md) for success, fail
 | [Per-screen contracts](docs/screen-contracts.md) | Proposed inputs, displayed fields, routes, buttons and destinations for each state |
 | [Screen inventory JSON](docs/mobile-screens.json) | Machine-readable mappings and evidence status |
 | [API contracts](docs/contracts.md) | Shared endpoint behavior and mobile flow handling |
-| [Database guide](docs/database.md) / [SQL schema](app/schema.sql) | Stored fields, relationships, ownership and statuses |
+| [Database guide](docs/database.md) / [SQL schema](src/schema.sql) | Stored fields, relationships, ownership and statuses |
 | [Decisions and open questions](docs/decisions.md) | Development defaults that still need product confirmation |
 | [Design](docs/design.md) / [Implementation plan](docs/implementation-plan.md) | Project boundaries and delivery approach |
 
@@ -138,28 +136,29 @@ node examples/smoke.mjs
 
 This checks login, feed loading, empty results, validation errors, logout and missing-session handling.
 
-For a physical device on your development network, start the API with `--host 0.0.0.0` and configure the app to use the computer's reachable LAN address, for example `http://192.168.1.10:8765`. Use your computer's actual address; `127.0.0.1` on a phone points to the phone itself. Keep this demo service on a trusted development network.
+For a physical device on your development network, start the API with `HOST=0.0.0.0 npm run dev` and configure the app to use the computer's reachable LAN address, for example `http://192.168.1.10:8765`. Use your computer's actual address; `127.0.0.1` on a phone points to the phone itself. Keep this demo service on a trusted development network.
 
 The smoke script accepts a different base URL through `GUILLIAMS_API_URL`. No mobile UI source is included in this repository, so backend flow tests do not establish that an iOS/Android UI has been connected or device-tested.
 
 ## Tests and contract updates
 
-From the activated virtual environment:
+From the repository root:
 
 ```sh
-pytest -q
-ruff check app tests scripts
-ruff format --check app tests scripts
-python scripts/verify_contract.py
+npm run check
+npm run build
 ```
 
-The test suite covers the twelve listing categories, sessions, verification, sponsorship, ownership, offers, private messages/media, profile changes, favourites, notifications, registration, concurrent requests and persistence. GitHub Actions also runs the mobile-client HTTP smoke check.
+`check` runs TypeScript typechecking, HTTP regression tests and contract verification. To run the compiled server, use `npm start` after building; `npm run dev` watches the TypeScript sources during development.
 
-After changing request/response models or routes, regenerate the exported specification:
+The test suite covers the twelve listing categories, sessions, verification, sponsorship, ownership, offers, private messages/media, profile changes, favourites, notifications, registration, concurrent requests and persistence. GitHub Actions installs the locked npm dependencies, runs the checks and build, starts the compiled server and runs the mobile-client HTTP smoke check.
+
+The shared JSON Schema contract is `src/openapi-source.json`. Handlers use generated TypeScript schema types, and AJV validates requests, query parameters and responses. After changing the contract or routes, update the exported specification and types:
 
 ```sh
-python scripts/export_openapi.py
-python scripts/verify_contract.py
+npm run export:openapi
+npm run generate:types
+npm run check
 ```
 
 Keep the screen contracts and product decisions in sync with behavior changes.
@@ -170,16 +169,19 @@ Keep the screen contracts and product decisions in sync with behavior changes.
 |---|---|---|
 | `GUILLIAMS_DB` | `data/guilliams.sqlite3` | SQLite file path, relative to the working directory unless absolute |
 | `GUILLIAMS_DEMO_MODE` | `true` | Set to `false` to disable simulated code authentication; password authentication remains available |
+| `HOST` | `127.0.0.1` | Server bind address |
+| `PORT` | `8765` | Server port |
 | `GUILLIAMS_API_URL` | `http://127.0.0.1:8765` | Base URL used by the client smoke script |
 
 ## Repository layout
 
 ```text
-app/              API models, feature routers, SQLite schema and fixtures
+src/              TypeScript server, feature routes, schema validation, SQLite schema and fixtures
+src/generated/    TypeScript definitions generated from OpenAPI
 docs/             Screen contracts, database notes and product decisions
 examples/         Mobile fetch client and live HTTP smoke check
 scripts/          OpenAPI export and consistency checks
-tests/            HTTP flow and regression tests
+tests-ts/         HTTP flow and regression tests using node:test and Fastify.inject
 static/swagger/   Locally served Swagger UI distribution
 openapi.yaml      Portable API specification (JSON also included)
 ```

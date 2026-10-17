@@ -3,6 +3,7 @@
 This project implements the six-step mobile API workflow approved in the project conversation. It is a local development backend with persistent SQLite data, predictable fictional fixtures, one generated OpenAPI specification, and mobile screen contracts. No external integrations or UI implementation are included.
 
 ## Boundaries
+- The implementation uses TypeScript and Fastify on Node.js 22.16 or later, with synchronous built-in SQLite transactions. Shared OpenAPI JSON Schemas generate TypeScript types and validate requests, queries and responses through AJV.
 - Authentication supports username/password as requested by the internship brief, plus simulated phone/email code flows matching the Figma. Verification is local development only.
 - Feature modules: authentication/onboarding, reference data/feed/search, sponsorship, listings, offers/conversations, profile/notifications.
 - SQLite enforces ownership and relationships. Monetary values use integer minor units plus ISO currency.

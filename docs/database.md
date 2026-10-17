@@ -1,6 +1,6 @@
 # Database structure and field coverage
 
-The executable source is [app/schema.sql](../app/schema.sql). Every app instance enables SQLite foreign keys. The seed runs only on a database with no users; normal restarts preserve changes. `schema_version` records version 1. No reset/admin endpoint exists.
+The executable source is [src/schema.sql](../src/schema.sql). Every app instance enables SQLite foreign keys. The seed runs only on a database with no users; normal restarts preserve changes. `schema_version` records version 1. No reset/admin endpoint exists.
 
 | Tables | Purpose and relationships |
 |---|---|
@@ -20,6 +20,6 @@ Category-specific listing fields use one JSON `attributes` column validated thro
 
 `User`, `Listing`, `Sponsorship`, `Offer`, `Conversation`, `Message` and `Notification` are reusable OpenAPI response definitions. Profile-only contact fields are not part of public `Member`. Category attributes round-trip through list/detail/create/update, while search exposes a typed JSON filter document.
 
-Each request uses a separate connection with `BEGIN IMMEDIATE` before guarded reads. This serializes local SQLite operations, preventing concurrent code reuse and stale state transitions. It favours correctness over throughput for the demo. A production database should use row-level transactions and conditional updates.
+The TypeScript server uses Node’s synchronous SQLite driver and wraps API handlers in `BEGIN IMMEDIATE` transactions before guarded reads. Handlers do not yield while a transaction is open. This serializes local SQLite operations, preventing concurrent code reuse and stale state transitions. It favours correctness over throughput for the demo. A production database should use row-level transactions and conditional updates.
 
-Run `python scripts/verify_contract.py` to validate exported schema parity, Figma link mappings, foreign keys and SQLite integrity. Tests also cover restarts and concurrent requests. Soft-deleted data remains stored; see the explicit retention question in [decisions.md](decisions.md).
+Run `npm run verify:contract` to validate exported schema parity, Figma link mappings, foreign keys and SQLite integrity. Tests also cover restarts and concurrent requests. Soft-deleted data remains stored; see the explicit retention question in [decisions.md](decisions.md).

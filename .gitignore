@@ -1,13 +1,18 @@
-.venv/
-__pycache__/
-.pytest_cache/
-.ruff_cache/
-*.pyc
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
 .env
 .env.*
 !.env.example
 data/
 *.sqlite3*
 .DS_Store
-coverage.xml
+# Local artifacts left by the previous implementation
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
 .coverage
+coverage.xml

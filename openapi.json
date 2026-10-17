@@ -6866,8 +6866,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100.0,
-                "minimum": 0.0
+                "maximum": 100,
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -6879,8 +6879,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100.0,
-                "minimum": 0.0
+                "maximum": 100,
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -6892,7 +6892,7 @@
             "anyOf": [
               {
                 "type": "number",
-                "exclusiveMinimum": 0.0
+                "exclusiveMinimum": 0
               },
               {
                 "type": "null"
@@ -6904,8 +6904,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 1200.0,
-                "minimum": 1.0
+                "maximum": 1200,
+                "minimum": 1
               },
               {
                 "type": "null"
@@ -6928,8 +6928,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100.0,
-                "minimum": 0.0
+                "maximum": 100,
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -6961,7 +6961,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "minimum": 0.0
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -6973,7 +6973,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "minimum": 0.0
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -7001,8 +7001,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100.0,
-                "minimum": 0.0
+                "maximum": 100,
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -7014,8 +7014,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100.0,
-                "minimum": 0.0
+                "maximum": 100,
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -7027,8 +7027,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100.0,
-                "minimum": 0.0
+                "maximum": 100,
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -7040,8 +7040,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100.0,
-                "minimum": 0.0
+                "maximum": 100,
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -7097,8 +7097,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 10000.0,
-                "minimum": 1.0
+                "maximum": 10000,
+                "minimum": 1
               },
               {
                 "type": "null"
@@ -7125,8 +7125,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 2100.0,
-                "minimum": 1900.0
+                "maximum": 2100,
+                "minimum": 1900
               },
               {
                 "type": "null"
@@ -7138,7 +7138,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "minimum": 0.0
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -7158,8 +7158,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100000.0,
-                "minimum": 1.0
+                "maximum": 100000,
+                "minimum": 1
               },
               {
                 "type": "null"
@@ -7171,7 +7171,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "minimum": 0.0
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -7183,7 +7183,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "minimum": 1.0
+                "minimum": 1
               },
               {
                 "type": "null"
@@ -7657,8 +7657,8 @@
           },
           "price_minor": {
             "type": "integer",
-            "maximum": 100000000000.0,
-            "minimum": 0.0,
+            "maximum": 100000000000,
+            "minimum": 0,
             "title": "Price Minor"
           },
           "currency": {
@@ -7786,8 +7786,8 @@
           },
           "price_minor": {
             "type": "integer",
-            "maximum": 100000000000.0,
-            "minimum": 0.0,
+            "maximum": 100000000000,
+            "minimum": 0,
             "title": "Price Minor"
           },
           "currency": {
@@ -7922,8 +7922,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100000000000.0,
-                "minimum": 0.0
+                "maximum": 100000000000,
+                "minimum": 0
               },
               {
                 "type": "null"
@@ -8398,8 +8398,8 @@
             "anyOf": [
               {
                 "type": "integer",
-                "maximum": 100000000000.0,
-                "exclusiveMinimum": 0.0
+                "maximum": 100000000000,
+                "exclusiveMinimum": 0
               },
               {
                 "type": "null"
@@ -8419,8 +8419,8 @@
         "properties": {
           "amount_minor": {
             "type": "integer",
-            "maximum": 100000000000.0,
-            "exclusiveMinimum": 0.0,
+            "maximum": 100000000000,
+            "exclusiveMinimum": 0,
             "title": "Amount Minor"
           }
         },
