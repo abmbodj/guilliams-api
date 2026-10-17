@@ -1,0 +1,4 @@
+static/swagger/** linguist-vendored
+openapi.json linguist-generated
+openapi.yaml linguist-generated
+docs/mobile-screens.json linguist-generated
